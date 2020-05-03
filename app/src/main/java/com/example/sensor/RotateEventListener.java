@@ -16,7 +16,7 @@ public class RotateEventListener implements SensorEventListener {
         public void rotate(float wx, float wy, float wz);
     }
 
-    public void setRotateListener(RotateListener Listener) {
+    void setRotateListener(RotateListener Listener) {
         this.rListener = Listener;
         if (rListener != null) {
             Log.w("Tag", "pListener is not null");

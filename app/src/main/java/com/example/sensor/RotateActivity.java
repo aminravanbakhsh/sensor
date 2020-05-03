@@ -1,5 +1,6 @@
 package com.example.sensor;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -11,9 +12,6 @@ import androidx.annotation.Nullable;
 
 public class RotateActivity extends Activity implements RotateEventListener.RotateListener {
 
-    private SensorManager sensorManager;
-    private Sensor gyroscopeSensor;
-    private RotateEventListener rotateEventListener;
     private TextView textView;
 
     @Override
@@ -21,10 +19,11 @@ public class RotateActivity extends Activity implements RotateEventListener.Rota
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rotate);
 
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        assert sensorManager != null;
+        Sensor gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
-        rotateEventListener = new RotateEventListener();
+        RotateEventListener rotateEventListener = new RotateEventListener();
         rotateEventListener.setRotateListener(this);
 
         sensorManager.registerListener(rotateEventListener, gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -32,6 +31,7 @@ public class RotateActivity extends Activity implements RotateEventListener.Rota
         textView = (TextView) findViewById(R.id.rotate_text);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void rotate(float wx, float wy, float wz) {
         Log.w("Tag", "hooo");

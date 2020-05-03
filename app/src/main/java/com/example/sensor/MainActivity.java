@@ -6,19 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.sensor.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = (Button) findViewById(R.id.sensor_btn);
+        Button button = findViewById(R.id.sensor_btn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button shakeBtn = (Button) findViewById(R.id.shake_btn);
+        Button shakeBtn = findViewById(R.id.shake_btn);
         shakeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button posButton = (Button) findViewById(R.id.pos_btn);
+        Button posButton = findViewById(R.id.pos_btn);
         posButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button rotateButton = (Button) findViewById(R.id.rotate_btn);
+        Button rotateButton = findViewById(R.id.rotate_btn);
         rotateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

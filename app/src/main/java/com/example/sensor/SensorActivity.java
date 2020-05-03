@@ -26,9 +26,7 @@ public class SensorActivity extends Activity {
     private TextView yTest;
     private TextView zTest;
     private Sensor proximitySensor;
-    private Sensor gyroscopeSensor;
     private SensorEventListener proximitySensorListener;
-    private SensorEventListener gyroscopeSensorListener;
 
 
     @Override
@@ -39,8 +37,9 @@ public class SensorActivity extends Activity {
         Intent intent = getIntent();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        assert sensorManager != null;
         proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        Sensor gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
         if(proximitySensor == null) {
             Log.e(TAG, "Proximity sensor not available.");
@@ -72,15 +71,16 @@ public class SensorActivity extends Activity {
 //        gyroscope
 
 
-
-
-        gyroscopeSensorListener = new SensorEventListener() {
+        // More code goes here
+        // anticlockwise
+        // clockwise
+        SensorEventListener gyroscopeSensorListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 // More code goes here
-                if(sensorEvent.values[2] > 0.5f) { // anticlockwise
+                if (sensorEvent.values[2] > 0.5f) { // anticlockwise
                     getWindow().getDecorView().setBackgroundColor(Color.BLUE);
-                } else if(sensorEvent.values[2] < -0.5f) { // clockwise
+                } else if (sensorEvent.values[2] < -0.5f) { // clockwise
                     getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
                 }
 
@@ -99,9 +99,9 @@ public class SensorActivity extends Activity {
         sensorManager.registerListener(gyroscopeSensorListener,
                 gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        xTest = (TextView) findViewById(R.id.x_text);
-        yTest = (TextView) findViewById(R.id.y_text);
-        zTest = (TextView) findViewById(R.id.z_text);
+        xTest = findViewById(R.id.x_text);
+        yTest = findViewById(R.id.y_text);
+        zTest = findViewById(R.id.z_text);
 
         if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null){
             // Success! There's a magnetometer.

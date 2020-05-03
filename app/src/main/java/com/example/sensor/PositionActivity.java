@@ -5,16 +5,12 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 public class PositionActivity extends Activity implements PositionEventListener.PositionListener {
 
-    private SensorManager sensorManager;
-    private Sensor gravitySensor;
-    private PositionEventListener positionEventListener;
     private TextView textView;
 
 
@@ -24,12 +20,13 @@ public class PositionActivity extends Activity implements PositionEventListener.
         setContentView(R.layout.activity_position);
         Intent intent = getIntent();
 
-        textView = (TextView) findViewById(R.id.or_btn);
+        textView = findViewById(R.id.or_btn);
 
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        assert sensorManager != null;
+        Sensor gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
 
-        positionEventListener = new PositionEventListener();
+        PositionEventListener positionEventListener = new PositionEventListener();
         positionEventListener.setPositionListener(this);
 
         sensorManager.registerListener(positionEventListener, gravitySensor, SensorManager.SENSOR_DELAY_NORMAL);

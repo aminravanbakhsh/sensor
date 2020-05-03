@@ -15,7 +15,7 @@ public class PositionEventListener implements SensorEventListener {
 
     }
 
-    public void setPositionListener(PositionListener Listener) {
+    void setPositionListener(PositionListener Listener) {
         this.pListener = Listener;
         if (pListener != null) {
             Log.w("Tag", "pListener is not null");
