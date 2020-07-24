@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +46,24 @@ public class MainActivity extends AppCompatActivity {
                 goRotate();
             }
         });
+
+        Button setBtn = findViewById(R.id.set_btn);
+        setBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.w("Tag", "ok");
+                goSet();
+            }
+        });
+
+        Button selectMissionBtn = findViewById(R.id.main_select_mission_btn);
+        selectMissionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goSelectMission();
+            }
+        });
+
     }
 
     public void sendMessage() {
@@ -68,4 +86,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goSet() {
+        Intent intent = new Intent(this, SetAlarmActivity.class);
+        startActivity(intent);
+    }
+
+    public void goSelectMission() {
+        Intent intent = new Intent(this, SelectMissionActivity.class);
+        startActivity(intent);
+    }
 }

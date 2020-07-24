@@ -33,9 +33,9 @@ public class RotateActivity extends Activity implements RotateEventListener.Rota
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void rotate(float wx, float wy, float wz) {
+    public void rotate(int countX, int countY, int countZ) {
         Log.w("Tag", "hooo");
-        textView.setText("x: " + String.valueOf(wx) + " y: " + String.valueOf(wy) + " z: " + String.valueOf(wz));
+        textView.setText("x: " + String.valueOf(countX) + " y: " + String.valueOf(countY) + " z: " + String.valueOf(countZ));
     }
 
 }

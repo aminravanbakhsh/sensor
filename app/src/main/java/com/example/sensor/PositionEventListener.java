@@ -5,6 +5,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.Log;
 
+//use gyroscope sensor
+
 public class PositionEventListener implements SensorEventListener {
 
     private static final float X_THRESHOLD_GRAVITY = 0.985F;

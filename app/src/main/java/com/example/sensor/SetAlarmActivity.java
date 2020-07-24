@@ -35,8 +35,11 @@ public class SetAlarmActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
 
+        Intent intent = getIntent();
+
         final AlarmManager alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         final TimePicker alarm_timepicker = (TimePicker) findViewById(R.id.timePicker);
+
         @SuppressLint("CutPasteId") final TextView alarm_state = (TextView) findViewById(R.id.alarm_state);
 
         final Calendar calendar = Calendar.getInstance();

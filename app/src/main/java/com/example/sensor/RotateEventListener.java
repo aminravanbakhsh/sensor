@@ -7,13 +7,26 @@ import android.util.Log;
 
 public class RotateEventListener implements SensorEventListener {
 
+    private static final int ROTATE_SLOP_TIME_MS = 500;
+    private static final int ROTATE_COUNT_RESET_TIME_MS = 3000;
+    private static final float ROTATION_SPEED_THRESHOLD = 0.002f;
+
+    private long mRotateTimestamp;
+    private int mShakeCount;
+
     private RotateListener rListener;
     private float xl;
     private float yl;
     private float zl;
 
+    public RotateEventListener() {
+        xl = 0;
+        yl = 0;
+        zl = 0;
+    }
+
     public interface RotateListener{
-        public void rotate(float wx, float wy, float wz);
+        public void rotate(int countX, int countY, int countZ);
     }
 
     void setRotateListener(RotateListener Listener) {
@@ -36,21 +49,33 @@ public class RotateEventListener implements SensorEventListener {
             float wy = event.values[1];
             float wz = event.values[2];
 
-            float dx = wx - xl;
-            float dy = wy - yl;
-            float dz = wz - zl;
+            Log.w("Tag", "z: " + String.valueOf(zl) + " y: " + String.valueOf(yl) + " x: " + String.valueOf(xl));
 
-//            this.xa += wx * 1 / SensorManager.SENSOR_DELAY_NORMAL;
-//            this.ya += wy * 1 / SensorManager.SENSOR_DELAY_NORMAL;
-//            this.za += wz * 1 / SensorManager.SENSOR_DELAY_NORMAL;
 
-//            this.xa += wx;
-//            this.ya += wy;
-//            this.za += wz;
+            Log.w("Tag", "rotate");
+            if (rListener != null) {
+                float w = (float) Math.sqrt(wx*wx + wy*wy + wz*wz);
+                if (w > ROTATION_SPEED_THRESHOLD) {
+                    final long now = System.currentTimeMillis();
 
-//            rListener.position(xa,ya,za);
-            Log.w("Tag", "z: " + String.valueOf(wz) + " y: " + String.valueOf(wy) + " x: " + String.valueOf(wx));
-            rListener.rotate(wx,wy,wz);
+                    if (mRotateTimestamp + ROTATE_COUNT_RESET_TIME_MS < now) {
+                        xl = 0;
+                        yl = 0;
+                        zl = 0;
+                    }
+
+                    mRotateTimestamp = now;
+                    xl += wx;
+                    yl += wy;
+                    zl += wz;
+
+                    int countX = (int) (xl / (90.0f));
+                    int countY = (int) (yl / (90.0f));
+                    int countZ = (int) (zl / (90.0f));
+
+                    rListener.rotate(countX, countY, countZ);
+                }
+            }
         }
     }
 }

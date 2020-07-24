@@ -47,5 +47,17 @@
             android:layout_height="wrap_content"
             android:text="Rotate" />
 
+        <Button
+            android:id="@+id/set_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="set shake" />
+
+        <Button
+            android:id="@+id/main_select_mission_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="select mission" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

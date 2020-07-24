@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">Alarm</string>
 
@@ -10,4 +12,20 @@
         <item>Butt Buddy</item>
         <item>Robert better not get in my face</item>
     </string-array>
+
+    <string-array name="shake_level">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+    <string-array name="shake_count">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+
 </resources>
